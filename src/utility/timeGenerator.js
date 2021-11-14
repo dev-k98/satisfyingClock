@@ -5,7 +5,7 @@ const timegenerator = () => {
 	const minute = date.getMinutes();
 
 	return [
-		hour < 10 ? 0 : parseInt(minute / 10, 10),
+		hour < 10 ? 0 : parseInt(hour / 10, 10),
 		hour % 10,
 		minute < 10 ? 0 : parseInt(minute / 10, 10),
 		minute % 10,
