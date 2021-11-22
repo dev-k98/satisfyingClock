@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import { numGrid } from '../../utility/constants';
 import Clock from '../clock';
@@ -15,7 +16,7 @@ const Number = ({ number }) => {
 			{numberGrid.map((column) => (
 				<div>
 					{column.map((position) => (
-						<Clock position={position} />
+						<Clock key={uuid()} position={position} />
 					))}
 				</div>
 			))}

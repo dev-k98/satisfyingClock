@@ -9,8 +9,13 @@ const handStyles = makeStyles(() => ({
 		width: '10px',
 		backgroundColor: 'black',
 		transformOrigin: 'bottom',
-		transform: (pos) => (pos[0] < 4 ? `rotate(${90 * pos[0]}deg)` : `rotate(${225}deg)`),
-		animation: '$rotate 3s linear infinite',
+		transform: (pos) => {
+			if (pos[0] <= 4) return pos[0] < 4 ? `rotate(${90 * pos[0]}deg)` : `rotate(225deg)`;
+			return `rotate(360deg)`;
+		},
+		animation: '$rotateSecond 3s linear',
+		// animation: (pos) =>
+		// 	pos[0] < 4 ? '$rotateSecond 3s linear' : '$rotateSecond 3s linear infinite',
 	},
 	hour: {
 		position: 'relative',
@@ -19,18 +24,32 @@ const handStyles = makeStyles(() => ({
 		width: '10px',
 		backgroundColor: 'black',
 		border: 'transparent',
-		transform: (pos) => (pos[1] < 4 ? `rotate(${90 * pos[1]}deg)` : `rotate(${225}deg)`),
+		// transform: (pos) => (pos[1] < 4 ? `rotate(${90 * pos[1]}deg)` : `rotate(${360}deg)`),
+		transform: (pos) => {
+			if (pos[1] <= 4) return pos[1] < 4 ? `rotate(${90 * pos[1]}deg)` : `rotate(225deg)`;
+			return `rotate(360deg)`;
+		},
+		animation: '$rotateHour 3s linear',
 		transformOrigin: 'bottom',
-		animation: '$rotate 2s linear infinite',
+		// animation: (pos) => (pos[1] < 4 ? '$rotateHour 3s linear' : '$rotateHour 3s linear infinite'),
 	},
-	// '@keyframes rotate': {
-	// 	'0%': {
-	// 		transform: `rotate(${pos * 90}deg)`,
-	// 	},
-	// 	'100%': {
-	// 		transform: 'rotate(360deg)',
-	// 	},
-	// },
+
+	'@keyframes rotateSecond': {
+		'0%': {
+			transform: `rotate(0deg)`,
+		},
+		'100%': {
+			transform: (pos) => (pos[0] < 4 ? `rotate(${90 * pos[0]}deg)` : `rotate(360deg)`),
+		},
+	},
+	'@keyframes rotateHour': {
+		'0%': {
+			transform: `rotate(0deg)`,
+		},
+		'100%': {
+			transform: (pos) => (pos[1] < 4 ? `rotate(${90 * pos[1]}deg)` : `rotate(360deg)`),
+		},
+	},
 }));
 
 export default handStyles;
